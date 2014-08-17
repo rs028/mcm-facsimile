@@ -58,11 +58,11 @@ def facmecha(strfac):
     react = []
     prod = []
     mecha =[]
-    
+
     # apply regular expression to 'strfac' string which contains the
     # chemical mechanism and find all the chemical equations
     for ifac in regexpfac.finditer(strfac):
-        
+
         # extracts the rate coefficients of the forward (group 1) and
         # backward reactions (group 3), the reactants (group 4) and
         # the products (group 5) and delete the withespaces

@@ -20,7 +20,7 @@
 #                                                                      #
 # #################################################################### #
 
-# import module 'facsimile_funcs'
+# load module with facsimile functions
 import facsimile_funcs
 
 # opening message

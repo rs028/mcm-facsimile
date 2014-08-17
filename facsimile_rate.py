@@ -77,9 +77,9 @@ for spec in listspec:
     # counts the number of times the selected species is in the
     # reactants (eq[1]) and in the products (eq[2]) for each reaction
     # of the mechanism and take the difference (n)
-    for eq in mechanism: 
+    for eq in mechanism:
         n =  eq[2].count(spec) - eq[1].count(spec)
-        
+
         # when n is positive the species is produced by the reaction
         # parameter name is: 'F_species_counter'
         # the definition of the parameter is: 'parameter_name : reaction'
@@ -99,7 +99,7 @@ for spec in listspec:
             paramplist.append(paramp)
             defparamplist.append(defparamp)
             i = i + 1
-        
+
         # when n is positive the species is destroyed by the reaction
         # parameter name is: 'D_species_counter'
         # the definition of the parameter is: 'parameter_name : reaction'
@@ -119,7 +119,7 @@ for spec in listspec:
             paramdlist.append(paramd)
             defparamdlist.append(defparamd)
             j = j + 1
-            
+
     # write to file the code to calculate the rates of production
     # and destruction of the selected species
     fout.write("* ;\n* " + spec + " production\n* ;\n")
@@ -146,7 +146,7 @@ fout.write("""\n* ;
 DEFINITION OF THE PARAMETERS\n""")
 for item in defparamlist:
     fout.write(item)
-    
+
 # close files and end program
 fin.close()
 fout.close()

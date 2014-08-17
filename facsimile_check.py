@@ -10,7 +10,7 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.0, april 2005                                              #
+# version 1.1, september 2005                                          #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -30,7 +30,7 @@ print """
 print "enter name of the file with the model"
 filename = raw_input("filename: ")
 fin = open(filename, "r")
-fname = filename + ".check"
+filename = filename + ".check"
 fout = open(filename, "w")
 print "enter maximum line length"
 limit = raw_input("[default=72]: ")
@@ -42,20 +42,20 @@ if limit == "":
 else:
     limit = int(limit)
 
-# initialize counter and lists 
+# initialize counter and lists
 counter = 1
 linelist = []
 tablist = []
 
 # read input file line by line
 for line in fin.readlines():
-    
+
     # add line number to list if line length is over the limit
     row = len(line)
     if row > limit:
         linelist.append(counter)
 
-    # add line number to list if there is a tab in the line 
+    # add line number to list if there is a tab in the line
     if "\t" in line:
         tablist.append(counter)
 
