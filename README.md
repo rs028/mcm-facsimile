@@ -1,18 +1,14 @@
 mcm-facsimile
 =============
 
-version 1.1, august 2014
+Python (http//www.python.org/) programs for the manipulation of a
+chemical mechanisms in FACSIMILE format
+(http://www.mcpa-software.com/). Developed for use with the Master
+Chemical Mechanism (http://mcm.leeds.ac.uk/MCM/).
 
-INTRODUCTION
-------------
 
-The MCM FACSIMILE scripts are simple programs for the manipulation of
-a chemical mechanism in FACSIMILE format. They have been written for
-the Master Chemical Mechanism (http://mcm.leeds.ac.uk/MCM/), but I
-guess they could work for any chemical mechanism written in the
-FACSIMILE language.
-
-The archive contains 4 files (plus this README.txt file):
+DESCRIPTION
+-----------
 
 1) facsimile_funcs.py:
    contains functions used by the other scripts.
@@ -37,13 +33,14 @@ The archive contains 4 files (plus this README.txt file):
    fixes a formatting issue with exponential numbers in some FACSIMILE
    output files.
 
+
 REQUIREMENTS & INSTALLATION
 ---------------------------
 
 All you need to run the scripts is to have Python (version < 2.7) on
 your system. If it is not already installed, you can download it at
 http://www.python.org/. Note that these scripts will not work with
-Python 3.0 or later. Then download the archive in a directory of your
+Python 3.0 or later. Download the files in a directory of your
 choice.
 
 
@@ -62,10 +59,3 @@ instructions.
 
 IMPORTANT: facsimile_funcs.py must always be in the same directory as
 the other script files otherwise they will not work.
-
-
-FEEDBACK
---------
-
-If you have problems, questions, suggestions or if you find
-bugs/errors, please let me know by email: rob.sommariva@gmail.com
