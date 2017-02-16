@@ -14,31 +14,38 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.0, march 2005                                              #
+# version 1.1, december 2007                                           #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
 # #################################################################### #
 
-# load module with facsimile functions
+# load modules
+import sys
 import facsimile_funcs
 
 # opening message
 print """
-.................................................................
-: facsimile_var 1.0                                             :
-: extracts a list of all the species in the mechanism and       :
-: calculates the number of species and reactions in the         :
-: mechanism (FACSIMILE format)                                  :
-:...............................................................:
+.......................................................
+: facsimile_var 1.0                                   :
+: extracts a list of all the species in the mechanism :
+: and calculates the number of species and reactions  :
+: in the mechanism (FACSIMILE format)                 :
+:.....................................................:
 """
 
 # open input and output files
-print "enter name of the file with the chemical mechanism"
-filename = raw_input("filename: ")
-fin = open(filename, "r")
-filename = filename + ".var"
-fout = open(filename, "w")
+## file with mechanism is provided as script argument
+if sys.argv[1:]:
+    fname = sys.argv[1]
+## enter name of file with mechanism manually
+else:
+    print "enter name of the file with the model"
+    fname = raw_input("filename: ")
+fin = open(fname, "r")
+## output file
+fname = fname + ".var.out"
+fout = open(fname, "w")
 
 # read the input file in string
 facstring = fin.read()
@@ -48,39 +55,39 @@ facstring = fin.read()
 mechanism = []
 mechanism = facsimile_funcs.facmecha(facstring)
 
-# initialize list of species
-speclist = []
+# initialize list of variables
+varlist = []
 
 # look into the lists of reactants (eq[1]) and of products (eq[2])
 # of each reaction (eq) in the 'mechanism' list
 for eq in mechanism:
 
-    # add reactants to list of species if not there
-    for spec in eq[1]:
-        if spec not in speclist and spec != "":
-            speclist.append(spec)
+    # add reactants to list of variables if not there
+    for var in eq[1]:
+        if var not in varlist and var != "":
+            varlist.append(var)
 
-    # add products to list of species if not there
-    for spec in eq[2]:
-        if spec not in speclist and spec != "":
-            speclist.append(spec)
+    # add products to list of variables if not there
+    for var in eq[2]:
+        if var not in varlist and var != "":
+            varlist.append(var)
 
-# calculates number of species and reactions
-nspec = str(len(speclist))
+# calculates number of variables and reactions
+nvar = str(len(varlist))
 nreac = str(len(mechanism))
 
-# write the number of species and reactions to the output file
-# write the list of species to the output file
+# write the number of variables and reactions to the output file
+# write the list of variables to the output file
 fout.write("---------------------------\n")
-fout.write("n. species: " + nspec + "\n")
+fout.write("n. variables: " + nvar + "\n")
 fout.write("n. reactions: " + nreac + "\n")
 fout.write("---------------------------\n")
-facsimile_funcs.listblock(speclist,fout)
+facsimile_funcs.listblock(varlist,fout)
 
 # close files and end program
-# output to console the number of species and reactions
+# output to console the number of variables and reactions
 fin.close()
 fout.close()
-print "\nn. species:", nspec
+print "\nn. variables:", nvar
 print "n. reactions:", nreac
-print "\n--- output written to", filename, "---"
+print "\n--- output written to", fname, "---\n"
