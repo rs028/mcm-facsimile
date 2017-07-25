@@ -8,7 +8,8 @@
 #                                                                      #
 # The script uses the 'facmecha' function in the 'facsimile_funcs'     #
 # module to extract the chemical equations from the mechanism          #
-# to a list:                                                           #
+#                                                                      #
+# OUTPUT :                                                             #
 #                                                                      #
 # [ rate coefficients  [reactants list]  [products list] ]             #
 #                                                                      #
@@ -32,12 +33,11 @@ print """
 :.....................................................:
 """
 
-# input file is function argument
+# input file (script argument or enter manually)
 if sys.argv[1:]:
     fname = sys.argv[1]
-# input file entered manually
 else:
-    print "-> name of the mechanism file:"
+    print "-> name of mechanism file:"
     fname = raw_input("-> ")
 fin = open(fname, "r")
 
@@ -51,6 +51,7 @@ facstring = fin.read()
 varlist = []
 
 # make list of reactions in the mechanism
+mechanism = []
 mechanism = facsimile_funcs.facmecha(facstring)
 
 # parse the lists of reactants (eq[1]) and of products (eq[2]) of each
@@ -71,8 +72,8 @@ for eq in mechanism:
 nvar = str(len(varlist))
 nreac = str(len(mechanism))
 
-# write number of variables and reactions and list of variables to
-# output file
+# write number of variables, number of reactions and list of variables
+# to output file
 fout.write("---------------------------\n")
 fout.write("n. variables: " + nvar + "\n")
 fout.write("n. reactions: " + nreac + "\n")

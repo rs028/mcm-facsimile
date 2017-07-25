@@ -10,7 +10,8 @@
 #                                                                      #
 # The script uses the 'facmecha' function in the 'facsimile_funcs'     #
 # module to extract the chemical equations from the mechanism          #
-# to a list:                                                           #
+#                                                                      #
+# OUTPUT :                                                             #
 #                                                                      #
 # [ rate coefficients  [reactants list]  [products list] ]             #
 #                                                                      #
@@ -35,12 +36,11 @@ print """
 :.....................................................:
 """
 
-# input file is function argument
+# input file (script argument or enter manually)
 if sys.argv[1:]:
     fname = sys.argv[1]
-# input file entered manually
 else:
-    print "-> name of the mechanism file:"
+    print "-> name of mechanism file:"
     fname = raw_input("-> ")
 fin = open(fname, "r")
 
@@ -62,7 +62,6 @@ facstring = fin.read()
 linelist = []
 tablist = []
 varlist = []
-mechanism = []
 
 # find long lines and lines with tabs
 i = 1
@@ -77,10 +76,11 @@ for line in facstring:
     if "\t" in line:
         tablist.append(i)
 
-    # increment counter
+    # increment line counter
     i = i + 1
 
 # make list of reactions in the mechanism
+mechanism = []
 mechanism = facsimile_funcs.facmecha(facstring)
 
 # parse the lists of reactants (eq[1]) and of products (eq[2]) of each
