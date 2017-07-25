@@ -2,11 +2,11 @@
 #                                                                      #
 # FACSIMILE VARIABLES                                                  #
 #                                                                      #
-# This program extracts all the species of a chemical mechanism        #
-# in FACSIMILE format and calculates the number of species and the     #
-# number of reactions of the mechanism                                 #
+# Script to create a list of the chemical variables in a chemical      #
+# mechanism (in FACSIMILE format) and count the number of species      #
+# and reactions in the mechanism                                       #
 #                                                                      #
-# The program uses the 'facmecha' function in the 'facsimile_funcs'    #
+# The script uses the 'facmecha' function in the 'facsimile_funcs'     #
 # module to extract the chemical equations from the mechanism          #
 # to a list:                                                           #
 #                                                                      #
@@ -14,44 +14,41 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.1, december 2007                                           #
+# version 1.2, july 2017                                               #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
 # #################################################################### #
 
-# load modules
 import sys
 import facsimile_funcs
 
-# opening message
 print """
 .......................................................
-: facsimile_var 1.0                                   :
-: extracts a list of all the species in the mechanism :
-: and calculates the number of species and reactions  :
-: in the mechanism (FACSIMILE format)                 :
+: FACSIMILE VARIABLES  v1.2                           :
+:                                                     :
+: - list chemical variables in mechanism              :
+: - count number of species and reactions             :
 :.....................................................:
 """
 
-# open input and output files
-## file with mechanism is provided as script argument
+# input file is function argument
 if sys.argv[1:]:
     fname = sys.argv[1]
-## enter name of file with mechanism manually
+# input file entered manually
 else:
-    print "enter name of the file with the model"
-    fname = raw_input("filename: ")
+    print "-> name of the mechanism file:"
+    fname = raw_input("-> ")
+    print("")
 fin = open(fname, "r")
-## output file
-fname = fname + ".var.out"
-fout = open(fname, "w")
 
-# read the input file in string
+# output file
+fout = open("facsimile_var.out", "w")
+
+# read input file into string
 facstring = fin.read()
 
-# call 'facmecha' function
-# the function returns a list of the reactions in the mechanism
+# make list of reactions in the mechanism
 mechanism = []
 mechanism = facsimile_funcs.facmecha(facstring)
 
@@ -72,22 +69,23 @@ for eq in mechanism:
         if var not in varlist and var != "":
             varlist.append(var)
 
-# calculates number of variables and reactions
+# count number of variables and reactions
 nvar = str(len(varlist))
 nreac = str(len(mechanism))
 
-# write the number of variables and reactions to the output file
-# write the list of variables to the output file
+# write number of variables and reactions and list of variables to
+# output file
 fout.write("---------------------------\n")
 fout.write("n. variables: " + nvar + "\n")
 fout.write("n. reactions: " + nreac + "\n")
-fout.write("---------------------------\n")
+fout.write("---------------------------\n\n")
 facsimile_funcs.listblock(varlist,fout)
 
-# close files and end program
-# output to console the number of variables and reactions
+# output summary of results to console
+print "n. variables:", nvar
+print "n. reactions:", nreac
+print "\n--- output written to facsimile_var.out ---\n"
+
+# close files
 fin.close()
 fout.close()
-print "\nn. variables:", nvar
-print "n. reactions:", nreac
-print "\n--- output written to", fname, "---\n"
