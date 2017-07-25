@@ -2,14 +2,13 @@
 #                                                                      #
 # FACSIMILE CHECK                                                      #
 #                                                                      #
-# This program checks a FACSIMILE model for three common errors        #
-# which would cause FACSIMILE to crash:                                #
-#                                                                      #
-# 1. tabs instead of spaces in the file                                #
+# Script to check a FACSIMILE model for three common errors which may  #
+# cause FACSIMILE to crash at runtime:                                 #
+# 1. tabs instead of spaces                                            #
 # 2. lines longer than 72 characters                                   #
-# 3. variables names longer than 10 characters                         #
+# 3. variables longer than 10 characters                               #
 #                                                                      #
-# The program uses the 'facmecha' function in the 'facsimile_funcs'    #
+# The script uses the 'facmecha' function in the 'facsimile_funcs'     #
 # module to extract the chemical equations from the mechanism          #
 # to a list:                                                           #
 #                                                                      #
@@ -17,87 +16,90 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.2, december 2007                                           #
+# version 1.3, july 2017                                               #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
 # #################################################################### #
 
-# load modules
 import sys
 import facsimile_funcs
 
-# opening message
 print """
 .......................................................
-: facsimile_check 1.0                                 :
-: checks a FACSIMILE model for three common errors    :
+: FACSIMILE CHECK v1.3                                :
+:                                                     :
 : - tabs instead of spaces                            :
 : - lines longer than 72 characters                   :
-: - variables names longer than 10 characters         :
+: - variables longer than 10 characters               :
 :.....................................................:
 """
 
-# open input and output files
-## file with mechanism is provided as script argument
+# input file is function argument
 if sys.argv[1:]:
     fname = sys.argv[1]
-## enter name of file with mechanism manually
+# input file entered manually
 else:
-    print "enter name of the file with the chemical mechanism"
-    fname = raw_input("filename: ")
+    print "-> name of the mechanism file:"
+    fname = raw_input("-> ")
 fin = open(fname, "r")
-facstring = fin.read()
-## output file
-fname = fname + ".check.out"
-fout = open(fname, "w")
 
-# enter maximum line length
-print "\nenter maximum number of characters per line"
-limit = raw_input("[default=72]: ")
-
-# check the line length against the default value
-# 73 characters (includes the newline)
-if limit == "":
-    limit = 73
+# set maximum length of lines
+print "\n-> maximum number of characters per line [default=72]:"
+llimit = raw_input("-> ")
+if llimit == "":
+    llimit = 73
 else:
-    limit = int(limit)
+    llimit = int(llimit)
 
-# initialize lists 
-linelist = []; tablist = []; varlist = []
+# output file
+fout = open("facsimile_check.out", "w")
+
+# read input file into string
+facstring = fin.read()
+
+# initialize lists
+linelist = []
+tablist = []
+varlist = []
 mechanism = []
 
-# read input file line by line
+# find long lines and lines with tabs
 i = 1
 for line in facstring:
-    
+
     # add line number to list if line length is over the limit
     row = len(line)
-    if row > limit:
+    if row > llimit:
         linelist.append(i)
 
-    # add line number to list if there is a tab in the line 
+    # add line number to list if there is a tab in the line
     if "\t" in line:
         tablist.append(i)
 
     # increment counter
     i = i + 1
 
-# extract mechanism and go through the lists of reactants (eq[1])
-# and of products (eq[2]) in the 'mechanism' list
+# make list of reactions in the mechanism
 mechanism = facsimile_funcs.facmecha(facstring)
+
+# parse the lists of reactants (eq[1]) and of products (eq[2]) of each
+# reaction (eq) in the 'mechanism' list
 for eq in mechanism:
-    # add variable to list if name is too long if not there
+
+    # add reactant with long name to list of variables if not there
     for var in eq[1]:
         if len(var) > 10 and var not in varlist:
             varlist.append(var)
+
+    # add product with long name to list of variables if not there
     for var in eq[2]:
         if len(var) > 10 and var not in varlist:
             varlist.append(var)
 
-# write list of lines over the limit to output file
+# write list of long lines to output file
 fout.write("---------------------------\n")
-fout.write("LINES LONGER THAN " + str(limit-1) + ":\n")
+fout.write("LINES LONGER THAN " + str(llimit-1) + ":\n")
 for i in linelist:
     fout.write(str(i))
 fout.write("\n---------------------------\n")
@@ -109,19 +111,19 @@ for i in tablist:
     fout.write(str(i))
 fout.write("\n---------------------------\n")
 
-# write list of variables with long names to output file
+# write list of variables with long name to output file
 fout.write("---------------------------\n")
-fout.write("VARIABLE NAMES TOO LONG:\n")
+fout.write("VARIABLES WITH LONG NAME:\n")
 for i in tablist:
     fout.write(str(i))
 fout.write("\n---------------------------\n")
 
-
-# close files and end program
 # output summary of results to console
-fin.close()
-fout.close()
-print "\nn. of lines longer than", limit-1, ":", len(linelist)
+print "\nn. of lines longer than", llimit-1, ":", len(linelist)
 print "n. of lines with tabs:", len(tablist)
 print "n. of variables with long names:", len(varlist)
-print "\n--- output written to", fname, "---\n"
+print "\n--- output written to facsimile_check.out ---\n"
+
+# close files
+fin.close()
+fout.close()

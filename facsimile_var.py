@@ -39,7 +39,6 @@ if sys.argv[1:]:
 else:
     print "-> name of the mechanism file:"
     fname = raw_input("-> ")
-    print("")
 fin = open(fname, "r")
 
 # output file
@@ -48,15 +47,14 @@ fout = open("facsimile_var.out", "w")
 # read input file into string
 facstring = fin.read()
 
-# make list of reactions in the mechanism
-mechanism = []
-mechanism = facsimile_funcs.facmecha(facstring)
-
 # initialize list of variables
 varlist = []
 
-# look into the lists of reactants (eq[1]) and of products (eq[2])
-# of each reaction (eq) in the 'mechanism' list
+# make list of reactions in the mechanism
+mechanism = facsimile_funcs.facmecha(facstring)
+
+# parse the lists of reactants (eq[1]) and of products (eq[2]) of each
+# reaction (eq) in the 'mechanism' list
 for eq in mechanism:
 
     # add reactants to list of variables if not there
@@ -82,7 +80,7 @@ fout.write("---------------------------\n\n")
 facsimile_funcs.listblock(varlist,fout)
 
 # output summary of results to console
-print "n. variables:", nvar
+print "\nn. variables:", nvar
 print "n. reactions:", nreac
 print "\n--- output written to facsimile_var.out ---\n"
 
