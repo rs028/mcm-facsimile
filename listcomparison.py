@@ -13,13 +13,12 @@
 # [length of list A, length of list B,                                 #
 #  [elements in list A and in list B],                                 #
 #  [elements in list A not in list B],                                 #
-#  [elements in list B and in list A],                                 #
 #  [elements in list B not in list A]]                                 #
 #                                                                      #
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.2, july 2017                                               #
+# version 1.3, july 2017                                               #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -30,7 +29,7 @@ import facsimile_funcs
 
 print """
 .......................................................
-: LIST COMPARISON v1.2                                :
+: LIST COMPARISON v1.3                                :
 : - compare two lists of variables in two files       :
 :.....................................................:
 """
@@ -56,8 +55,10 @@ finB = facsimile_funcs.openlist(fnameB)
 comparestr = facsimile_funcs.complist(finA,finB)
 
 # write comparison results to output file
-fout.write("\n'" + fnameA + "' contains " + str(comparestr[0]) + " variables\n")
-fout.write("\n'" + fnameB + "' contains " + str(comparestr[1]) + " variables\n")
+fout.write("---------------------------\n")
+fout.write("'" + fnameA + "' contains " + str(comparestr[0]) + " variables\n")
+fout.write("'" + fnameB + "' contains " + str(comparestr[1]) + " variables\n")
+fout.write("---------------------------\n\n")
 
 fout.write("\n\n\tthese variables of '" + fnameA + "' are also in '" + fnameB + "' :\n")
 facsimile_funcs.listblock(comparestr[2],fout)
@@ -65,15 +66,15 @@ facsimile_funcs.listblock(comparestr[2],fout)
 fout.write("\n\n\tthese variables are in '" + fnameA + "' but not in '" + fnameB + "' :\n")
 facsimile_funcs.listblock(comparestr[3],fout)
 
-fout.write("\n\n\tthese variables of '" + fnameB + "' are also in '" + fnameA + "' :\n")
-facsimile_funcs.listblock(comparestr[4],fout)
+#fout.write("\n\n\tthese variables of '" + fnameB + "' are also in '" + fnameA + "' :\n")
+#facsimile_funcs.listblock(comparestr[4],fout)
 
 fout.write("\n\n\tthese variables are in '" + fnameB + "' but not in '" + fnameA + "' :\n")
 facsimile_funcs.listblock(comparestr[5],fout)
 
 # output summary of results to console
-print "\nn. variables in list A:", str(comparestr[0])
-print "n. variables in list B:", str(comparestr[1])
+print "\n'" + fnameA + "' contains " + str(comparestr[0]) + " variables"
+print "'" + fnameB + "' contains " + str(comparestr[1]) + " variables"
 print "\n--- output written to listcomparison.out ---\n"
 
 # close file
