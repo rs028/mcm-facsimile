@@ -58,18 +58,15 @@ comparestr = facsimile_funcs.complist(finA,finB)
 fout.write("---------------------------\n")
 fout.write("'" + fnameA + "' contains " + str(comparestr[0]) + " variables\n")
 fout.write("'" + fnameB + "' contains " + str(comparestr[1]) + " variables\n")
-fout.write("---------------------------\n\n")
+fout.write("---------------------------\n")
 
-fout.write("\n\n\tthese variables of '" + fnameA + "' are also in '" + fnameB + "' :\n")
+fout.write("\n\n===> these variables of '" + fnameA + "' are also in '" + fnameB + "' :\n\n")
 facsimile_funcs.listblock(comparestr[2],fout)
 
-fout.write("\n\n\tthese variables are in '" + fnameA + "' but not in '" + fnameB + "' :\n")
+fout.write("\n\n===> these variables are in '" + fnameA + "' but not in '" + fnameB + "' :\n\n")
 facsimile_funcs.listblock(comparestr[3],fout)
 
-#fout.write("\n\n\tthese variables of '" + fnameB + "' are also in '" + fnameA + "' :\n")
-#facsimile_funcs.listblock(comparestr[4],fout)
-
-fout.write("\n\n\tthese variables are in '" + fnameB + "' but not in '" + fnameA + "' :\n")
+fout.write("\n\n===> these variables are in '" + fnameB + "' but not in '" + fnameA + "' :\n\n")
 facsimile_funcs.listblock(comparestr[5],fout)
 
 # output summary of results to console
