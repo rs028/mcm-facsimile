@@ -17,7 +17,7 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.3, july 2017                                               #
+# version 1.4, april 2018                                              #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -101,21 +101,21 @@ for eq in mechanism:
 fout.write("---------------------------\n")
 fout.write("LINES LONGER THAN " + str(llimit-1) + ":\n")
 for i in linelist:
-    fout.write(str(i))
+    fout.write(str(i) + "\n")
 fout.write("\n---------------------------\n")
 
 # write list of lines with tabs to output file
 fout.write("---------------------------\n")
 fout.write("LINES WITH TABS:\n")
 for i in tablist:
-    fout.write(str(i))
+    fout.write(str(i) + "\n")
 fout.write("\n---------------------------\n")
 
 # write list of variables with long name to output file
 fout.write("---------------------------\n")
 fout.write("VARIABLES WITH LONG NAME:\n")
-for i in tablist:
-    fout.write(str(i))
+for i in varlist:
+    fout.write(str(i) + "\n")
 fout.write("\n---------------------------\n")
 
 # output summary of results to console
