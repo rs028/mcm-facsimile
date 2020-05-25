@@ -17,7 +17,7 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.4, april 2018                                              #
+# version 1.5, may 2020                                                #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -28,7 +28,7 @@ import facsimile_funcs
 
 print """
 .......................................................
-: FACSIMILE CHECK v1.3                                :
+: FACSIMILE CHECK v1.5                                :
 :                                                     :
 : - tabs instead of spaces                            :
 : - lines longer than 72 characters                   :
@@ -102,21 +102,21 @@ fout.write("---------------------------\n")
 fout.write("LINES LONGER THAN " + str(llimit-1) + ":\n")
 for i in linelist:
     fout.write(str(i) + "\n")
-fout.write("\n---------------------------\n")
+fout.write("\n---------------------------\n\n")
 
 # write list of lines with tabs to output file
 fout.write("---------------------------\n")
 fout.write("LINES WITH TABS:\n")
 for i in tablist:
     fout.write(str(i) + "\n")
-fout.write("\n---------------------------\n")
+fout.write("\n---------------------------\n\n")
 
 # write list of variables with long name to output file
 fout.write("---------------------------\n")
 fout.write("VARIABLES WITH LONG NAME:\n")
 for i in varlist:
     fout.write(str(i) + "\n")
-fout.write("\n---------------------------\n")
+fout.write("\n---------------------------\n\n")
 
 # output summary of results to console
 print "\nn. of lines longer than", llimit-1, ":", len(linelist)
