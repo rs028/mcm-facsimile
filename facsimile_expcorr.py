@@ -1,30 +1,31 @@
 # #################################################################### #
 #                                                                      #
-# EXPCORRECT                                                           #
+# FACSIMILE EXPCORRECT                                                 #
 #                                                                      #
-# Program to fix a formatting issue in some FACSIMILE output files: in   #
-# exponential format, 'e' or 'E' can be omitted when a negative        #
-# exponent has more than 3 digits.                                     #
+# Script to fix a formatting issue in some FACSIMILE output files:     #
+# if the exponent of number in scientific format has 3 digits or more, #
+# the 'e' or 'E' is sometimes omitted:                                 #
 # e.g.:                                                                #
 #       1.234-100 instead of 1.234e-100                                #
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.2, november 2010                                           #
+# version 1.3, may 2020                                                #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
 # #################################################################### #
 
-# load modules
-import re, sys
+import sys
+import re
 
-## Function to fix the exponential format in FACSIMILE output files
+# #################################################################### #
+
 def expcorr(fname):
 
     # open I/O files
     fin = open(fname, "r")
-    fname = fname+".1"
+    fname = fname+".out"
     fout = open(fname, "w")
 
     # read file into string
@@ -42,24 +43,17 @@ def expcorr(fname):
 
 
 # #################################################################### #
-# opening message
+
 print """
 .......................................................
-: expcorrect 1.2                                      :
+: FACSIMILE EXPCORRECT v1.3                           :
 :                                                     :
 : fix the exponential format issue (e.g., 1.234-100)  :
-: in FACSIMILE output files                             :
-:.....................................................:"""
+: in FACSIMILE output files                           :
+:.....................................................:
+"""
 
-## list of files is provided as script argument
+## FACSIMILE output files to process (script argument)
 if sys.argv[1:]:
     for f in sys.argv[1:]:
-        expcorr(f)
-
-## list of files is manual input (comma separated list)
-else:
-    print "\nenter name of FACSIMILE output file(s) to process"
-    print ">> separate multiple files with commas <<"
-    filename = raw_input("name of file(s): ")
-    for f in filename.split(','):
         expcorr(f)
