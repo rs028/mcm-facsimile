@@ -18,7 +18,7 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.3, july 2017                                               #
+# version 1.4, may 2020                                                #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -29,7 +29,7 @@ import facsimile_funcs
 
 print """
 .......................................................
-: LIST COMPARISON v1.3                                :
+: LIST COMPARISON v1.4                                :
 : - compare two lists of variables in two files       :
 :.....................................................:
 """
@@ -60,7 +60,7 @@ fout.write("'" + fnameA + "' contains " + str(comparestr[0]) + " variables\n")
 fout.write("'" + fnameB + "' contains " + str(comparestr[1]) + " variables\n")
 fout.write("---------------------------\n")
 
-fout.write("\n\n===> these variables of '" + fnameA + "' are also in '" + fnameB + "' :\n\n")
+fout.write("\n\n===> these variables are in '" + fnameA + "' and in '" + fnameB + "' :\n\n")
 facsimile_funcs.listblock(comparestr[2],fout)
 
 fout.write("\n\n===> these variables are in '" + fnameA + "' but not in '" + fnameB + "' :\n\n")
