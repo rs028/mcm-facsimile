@@ -33,14 +33,13 @@ def expcorr(fname):
 
     # use regular expression to replace all occurences of the wrong
     # exponential format (e.g.: 1.234-100) with the correct one
-    newfinstr = re.sub(r'\B(\d)(-)(\d\d\d)\b', r'\1e\2\3', finstr)
+    newfinstr = re.sub(r'\B(\d)(-)(\d\d\d)\b',r'\1e\2\3',finstr)
 
     # save processed file
     fout.write(newfinstr)
     fin.close()
     fout.close()
     print "\n--- output written to", fname, "---\n"
-
 
 # #################################################################### #
 
@@ -52,7 +51,7 @@ print """
 :.....................................................:
 """
 
-## output files to process (script argument)
+## FACSIMILE output files to process (script argument)
 if sys.argv[1:]:
     for f in sys.argv[1:]:
         expcorr(f)

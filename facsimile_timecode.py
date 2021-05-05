@@ -139,7 +139,8 @@ print """
 .......................................................
 : FACSIMILE TIMECODE v1.4                             :
 :                                                     :
-: generate the FACSIMILE code for model time control  :
+: generate the FACSIMILE code for the time control    :
+: of a model                                          :
 :.....................................................:
 """
 

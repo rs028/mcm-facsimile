@@ -2,26 +2,30 @@
 #                                                                      #
 # FACSIMILE REACTION RATES                                             #
 #                                                                      #
-# This program creates a new list of parameters and writes the         #
-# FACSIMILE code for the calculation of the rates of production and    #
-# destruction of selected species in a chemical mechanism              #
-# It also writes the definitions of the new parameters created that    #
-# can be used to interpret the model output                            #
+# Script to generate the FACSIMILE code for the calculation of the     #
+# rates of production and destruction of selected species in a         #
+# chemical mechanism                                                   #
+#                                                                      #
+# The script uses the 'facmecha' function in the 'facsimile_funcs'     #
+# module to extract the chemical equations from the mechanism, and     #
+# the 'ropa' function in the 'facsimile_funcs' module to select the    #
+# reactions containing a given species                                 #
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 2.5, july 2008                                               #
+# version 2.6, april 2021                                              #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
 # #################################################################### #
 
-# load module with facsimile functions
 import textwrap
 import facsimile_funcs
 
-## This function writes the lists of parameters, the expressions to
-## calculate the production and destruction rates and the definitions
+# #################################################################### #
+
+## function to write the lists of parameters, the expressions to
+## calculate the production and destruction rates, and the definitions
 ## of the new parameters to an output file
 def outputrates(r,fname,paramlist,totparamlist,expresslist,definlist):
     fout = open(fname, "w")
@@ -56,8 +60,7 @@ def outputrates(r,fname,paramlist,totparamlist,expresslist,definlist):
             # reactant (default=all)
             if reactant in el:
                 fout.write(el)
-        # write expression for total
-        # production/destruction rate 
+        # write expression for total production/destruction rate
         if reactant == '':
             fout.write("* ;\n")
             tot = totparamlist[i] + " = " + " + ".join(paramlist[i])
@@ -77,13 +80,14 @@ def outputrates(r,fname,paramlist,totparamlist,expresslist,definlist):
     print "\n--- output written to", fname, "---\n"
 
 # #################################################################### #
-# opening message
+
 print """
 .......................................................
-: facsimile_rate 2.5                                  :
-: creates a new list of parameters and writes the     :
-: FACSIMILE code to calculate the rates of production :
-: and destruction of selected species                 :
+: FACSIMILE RATE 2.6                                  :
+:                                                     :
+:                                                     :
+: generate the FACSIMILE code to calculate the rates  :
+: of production and destruction of selected species   :
 :                                                     :
 : >>> selected species in 'facsimile_rate.in' <<<     :
 :.....................................................:
@@ -94,9 +98,9 @@ print "enter name of the file with the chemical mechanism"
 filename = raw_input("filename: ")
 fin = open(filename, "r")
 fileoutP = filename + ".rateP.out"
-fileoutD = filename + ".rateD.out" 
+fileoutD = filename + ".rateD.out"
 
-# read the input file in string
+# read input file in string
 facstring = fin.read()
 
 # call 'facmecha' function
@@ -110,9 +114,9 @@ listspecies = facsimile_funcs.openlist("facsimile_rate.in")
 for i in range(len(listspecies)):
     listspecies[i] = listspecies[i].upper()
 
-# specify to output only the rates of reactions involving a specific
-# reactant (reactant name in upper case)
-print "\nwrite only the rates of reactions with a specific reactant?"
+# select the rates of the reactions involving a specific reactant
+# (reactant name in upper case)
+print "\nwrite only the rates of reactions that include a specific reactant?"
 print "[default: write the rates of all reactions]"
 reactant = raw_input("reactant name [press enter for default]: ")
 if reactant != '':
@@ -143,10 +147,10 @@ for species in listspecies:
     definPlist.append(ratelist[6])
     definDlist.append(ratelist[7])
 
-# write the output for the production and the destruction rates
+# write output files
 outputrates('p',fileoutP,paramPlist,totparamPlist,expressPlist,definPlist)
 outputrates('d',fileoutD,paramDlist,totparamDlist,expressDlist,definDlist)
 
-# close files and end program
+# close files
 fin.close()
 finput.close()
