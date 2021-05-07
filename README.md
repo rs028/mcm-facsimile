@@ -1,7 +1,7 @@
 mcm-facsimile
 =============
 
-Python (http//www.python.org/) programs for the manipulation of
+Python (http://www.python.org/) programs for the manipulation of
 chemical mechanisms in FACSIMILE format (http://www.mcpa-software.com/).
 
 Developed for use with the Master Chemical Mechanism (MCM,
@@ -25,7 +25,7 @@ DESCRIPTION
 4) facsimile_timecode.py:  
    generate the FACSIMILE code for the time control of a model.
 
-5) facsimile_track.py [**EXPERIMENTAL SCRIPT**]:  
+5) facsimile_track.py _[EXPERIMENTAL SCRIPT]_:  
    generate the FACSIMILE code to track the precursors of selected
    species.
 
@@ -52,8 +52,8 @@ Download the archive file
 (https://github.com/rs028/mcm-facsimile/archive/refs/heads/master.zip)
 and unzip it in a directory of choice.
 
-**IMPORTANT:** the module file `facsimile_funcs.py` must be kept in
-the same directory as the scripts.
+**IMPORTANT:** the module file `facsimile_funcs.py` must always be
+kept in the same directory as the `mcm-facsimile` scripts.
 
 
 USAGE
