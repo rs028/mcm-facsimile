@@ -1,16 +1,15 @@
 # ##################################################################### #
 #                                                                       #
-# FACSIMILE functions                                                   #
+# FACSIMILE FUNCTIONS                                                   #
 #                                                                       #
-# This module contains functions to be used by the MCM_FACSIMILE        #
-# tools:                                                                #
+# Module of functions for the MCM_FACSIMILE scripts:                    #
 #                                                                       #
-# - facmecha  : extracts the chemical equations from a mechanism        #
-# - ropa      : find the chemical equations containing selected species #
-# - listblock : outputs formatted list of variables                     #
-# - openlist  : reads file of variables into a list                     #
-# - complist  : compares two lists of variables                         #
-# - listcount : finds multiple variables in a list                      #
+# - facmecha  : extract the chemical equations from a mechanism         #
+# - ropa      : find the chemical equations containing a given species  #
+# - listblock : output formatted list of variables                      #
+# - openlist  : read file of variables into a list                      #
+# - complist  : compare two lists of variables                          #
+# - listcount : find multiple variables in a list                       #
 #                                                                       #
 # ##################################################################### #
 #                                                                       #
@@ -70,11 +69,11 @@ def facmecha(strfac):
     react = []
     prod = []
     mecha =[]
-    
+
     # apply regular expression to 'strfac' string which contains the
     # chemical mechanism and find all the chemical equations
     for ifac in regexpfac.finditer(strfac):
-        
+
         # extracts the reaction rate (group 1), the rate coefficients
         # of the forward (group 2) and backward reactions (group 4),
         # the reactants (group 5) and the products (group 6)
@@ -103,7 +102,7 @@ def facmecha(strfac):
             forweq.append(kf)
             forweq.append(react)
             forweq.append(prod)
-            
+
             # add to list for the backward reaction the rate coefficient
             # and the lists of products and reactants
             backeq.append(kb)
@@ -130,14 +129,14 @@ def facmecha(strfac):
     return mecha
 
 # ******************************************************************** #
-# REACTION function
+# ROPA function
 #
 # This function extracts all the reactions containing a selected
 # species in a chemical mechanism and assemble the expressions to
 # calculate the reaction rates in FACSIMILE format.
 # The chemical mechanism is a list extracted with the FACMECHA
 # function with the format:
-#                                                                      
+#
 # [ rate coefficients  [reactants list]  [products list] ]
 #
 # The function returns a list containing the lists of the parameters,
@@ -155,7 +154,7 @@ def facmecha(strfac):
 #   [list of definitions of destruction parameters] ]
 
 def ropa(mecha,spec):
-    
+
     # initialize a list for the parameters, a list for the definitions
     # of the parameters and a list for the result
     paramlist = []; defparamlist = []; resultlist = []
@@ -178,7 +177,7 @@ def ropa(mecha,spec):
 
         # when n is positive the species is produced by the reaction
         # parameter name is: 'P_species_counter'
-        # expression is 'parameter_name = n*rate coeff*species' 
+        # expression is 'parameter_name = n*rate coeff*species'
         # code number is the number of the reaction
         # definition of the parameter is: 'parameter_name : reaction'
         if n > 0:
@@ -201,7 +200,7 @@ def ropa(mecha,spec):
 
         # when n is positive the species is destroyed by the reaction
         # parameter name is: 'D_species_counter'
-        # expression is 'parameter_name = n*rate coeff*species' 
+        # expression is 'parameter_name = n*rate coeff*species'
         # code number is the number of the reaction
         # the definition of the parameter is: 'parameter_name : reaction'
         elif n < 0:
@@ -283,7 +282,7 @@ def openlist(listname):
 #  [elements in B not in A]]
 
 def complist(listA,listB):
- 
+
     # initialize lists
     AinB = []
     AnotB = []
@@ -332,10 +331,10 @@ def complist(listA,listB):
 # This function finds variables that are present more than once in a list
 # and return a list with this format:
 #
-# [[variable, times in list], [variable, times in list], etc...]
+# [[variable, times in list], [variable, times in list], ...]
 
 def listcount(flist):
-    
+
     # initialize lists
     duplicatelist = []
 
