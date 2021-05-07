@@ -2,11 +2,18 @@
 #                                                                      #
 # FACSIMILE TRACK                                                      #
 #                                                                      #
-# This program writes the FACSIMILE code necessary to track the        #
-# precursors of a list of selected species. It finds all the           #
-# reactions that produce the selected species, flags the species       #
-# according to the reaction, rewrites the destruction reactions for    #
-# the flagged species and creates proxies for the other variables      #
+# Script to generate the FACSIMILE code to track the precursors of     #
+# a list of selected species:                                          #
+# - find all the reactions that produce the selected species           #
+# - flag the species according to the reaction                         #
+# - rewrite the destruction reactions for the flagged species          #
+# - create proxies for the non-flagged species                         #
+#                                                                      #
+# The script uses the 'facmecha' function in the 'facsimile_funcs'     #
+# module to extract the chemical equations from the mechanism          #
+#                                                                      #
+# IMPORTANT NOTE: THIS SCRIPT IS EXPERIMENTAL, AND HAS NOT BEEN        #
+#                 PROPERLY TESTED OR DEBUGGED                          #
 #                                                                      #
 # #################################################################### #
 #                                                                      #
@@ -16,9 +23,10 @@
 #                                                                      #
 # #################################################################### #
 
-# load modules
 import sys
 import facsimile_funcs
+
+# #################################################################### #
 
 ## This function extracts from a chemical mechanism all the
 ## reactions including a selected species. The mechanism is in the format
@@ -57,7 +65,7 @@ def findreactions(mecha,spec):
             neweq.append(prod)
             # append the production reaction to list
             prodmecha.append(neweq)
-            
+
         # destruction reactions
         elif n < 0:
             # rate coefficient
@@ -140,7 +148,7 @@ def newreactions(mecha,spec):
     newmecha.append(specproxy)
     newmecha.append(proxy)
     return newmecha
-    
+
 ## This function takes a list of species as input and add a
 ## flag to a selected species if it is in the list
 ## All the species in the list are then joined in a string by
@@ -198,27 +206,28 @@ def writemechanism(mecha,spec,n,outputfile):
     return reslist
 
 # #################################################################### #
+
 # opening message
 print """
 .......................................................
-: facsimile_track 0.9                                 :
-: writes the FACSIMILE code necessary to track the    :
-: precursors of a list of selected species            :
+: FACSIMILE TRACK 0.9                                 :
 :                                                     :
-: >>> list of species in 'mcm_spider.in' <<<          :
+: generate the FACSIMILE code to track the precursors :
+: of a list of selected species                       :
+:                                                     :
+:  !!! WARNING -- EXPERIMENTAL SCRIPT -- WARNING !!!  :
 :.....................................................:
 """
 
 # get list of species
 listspecies = facsimile_funcs.openlist('facsimile_track.in')
 
-# open input and output files
-## file with mechanism is provided as script argument
+# file with mechanism is provided as script argument
 if sys.argv[1:]:
     fname = sys.argv[1]
-## enter name of file with mechanism manually
+# file with mechanism is entered manually
 else:
-    print "enter name of the file with the model"
+    print "enter name of the file with the mechanism"
     fname = raw_input("filename: ")
 fin = open(fname, "r")
 fname = fname + ".track"
@@ -287,13 +296,13 @@ for i in newvar:
     fout.write(i + " = " + oldvar[newvar.index(i)] + " ;\n")
 fout.write("* ;\n")
 
-# write the list of new variables and corresponding production reactions
-# to output files
+# write the list of new variables and the corresponding
+# production reactions to output files
 foutl.write("reaction_code\treaction\n")
 for i in range(0,len(newspec)):
     foutl.write(newspec[i]+"\t"+newsreac[i]+"\n")
 
-# close files and end program
+# close files
 fin.close()
 fout.close()
 foutl.close()
