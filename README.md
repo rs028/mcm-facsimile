@@ -1,61 +1,71 @@
 mcm-facsimile
 =============
 
-Python (http//www.python.org/) programs for the manipulation of a
-chemical mechanisms in FACSIMILE format
-(http://www.mcpa-software.com/). Developed for use with the Master
-Chemical Mechanism (http://mcm.leeds.ac.uk/MCM/).
+Python (http//www.python.org/) programs for the manipulation of
+chemical mechanisms in FACSIMILE format (http://www.mcpa-software.com/).
+
+Developed for use with the MCM (Master Chemical Mechanism,
+http://mcm.leeds.ac.uk/MCM/).
 
 
 DESCRIPTION
 -----------
 
-1) facsimile_funcs.py:
-   contains functions used by the other scripts.
+1) facsimile_check.py:
+   check a FACSIMILE model for common errors which cause FACSIMILE
+   to crash.
 
-2) facsimile_var.py:
-   extracts the list of species in a chemical mechanism and calculates
-   the number of species and the number of reactions in a chemical
-   mechanism.
+2) facsimile_expcorr.py:
+   fix the exponent issue in FACSIMILE output files.
 
 3) facsimile_rate.py:
-   finds all the reactions in a chemical mechanism that produce and
-   consume a list of species, then creates a new group of parameters
-   and writes the FACSIMILE code that can be inserted in the model to
-   calculate the rates of production and destruction of the selected
+   generate the FACSIMILE code to calculate the rates of production
+   and destruction of selected species.
+
+4) facsimile_timecode.py:
+   generate the FACSIMILE code for the time control of a model.
+
+5) facsimile_track.py [**EXPERIMENTAL SCRIPT**]:
+   generate the FACSIMILE code to track the precursors of selected
    species.
 
-4) facsimile_check.py:
-   checks a model for two common errors which cause FACSIMILE to crash
-   (lines longer than 72 characters and tabs instead of spaces).
+6) facsimile_var.py:
+   create the list of species in a chemical mechanism and
+   calculate the number of species and of reactions.
 
-5) facsimile_expcorr.py:
-   fixes a formatting issue with exponential numbers in some FACSIMILE
-   output files.
+7) listcomparison.py:
+   compare two lists of variables.
+
+8) facsimile_funcs.py:
+   module of functions used by the `mcm-facsimile` scripts.
 
 
 REQUIREMENTS & INSTALLATION
 ---------------------------
 
-All you need to run the scripts is to have Python (version < 2.7) on
-your system. If it is not already installed, you can download it at
-http://www.python.org/. Note that these scripts will not work with
-Python 3.0 or later. Download the files in a directory of your
-choice.
+A basic installation of Python (version 2.7.x) is needed to run the
+scripts. Note that the scripts will not work with Python 3.x, but can
+be easily converted (if needed) as explained here:
+https://docs.python.org/3/library/2to3.html
+
+Download the archive file
+(https://github.com/rs028/mcm-facsimile/archive/refs/heads/master.zip)
+and unzip it in a directory of choice.
+
+**IMPORTANT:** the module file `facsimile_funcs.py` must be kept in
+the same directory as the scripts.
 
 
 USAGE
 -----
 
-Put the file with the model or the mechanism in the same directory of
-the scripts. Open a console (DOS Prompt or Command Prompt under
-Windows, shell under Linux/Unix), move into the directory and type:
+Open a console (DOS Prompt or Command Prompt under Windows, Terminal
+under Linux/Unix/macOS), move into the directory containing the
+`mcm-facsimile` scripts and type:
 
-    python <scriptname>.py
+    python2 <scriptname>.py
 
-where <scriptname> is 'facsimile_var', 'facsimile_rate',
-'facsimile_check', 'facsimile_expcorr'. Then follow the
-instructions.
+where <scriptname> is `facsimile_check`, `facsimile_var`, etc...
 
-IMPORTANT: facsimile_funcs.py must always be in the same directory as
-the other script files otherwise they will not work.
+Some scripts have arguments and some require input files. Check the
+script header for details.
