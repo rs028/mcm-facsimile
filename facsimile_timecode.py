@@ -153,4 +153,4 @@ if op == "1":
 elif op == "2":
     irregular_time()
 else:
-    print "----- input error --- program terminated -----"
+    print "----- input error -----"

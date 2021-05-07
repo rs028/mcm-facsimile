@@ -3,8 +3,8 @@
 # FACSIMILE EXPCORRECT                                                 #
 #                                                                      #
 # Script to fix a formatting issue in the output files of a FACSIMILE  #
-# model: if the exponent of number in scientific format has 3 digits   #
-# or more, the 'e' or 'E' is sometimes missing                         #
+# model -- if the exponent of number in scientific format has          #
+# 3 digits or more, the 'e' or 'E' is sometimes missing:               #
 #   e.g., 1.234-100 instead of 1.234e-100                              #
 #                                                                      #
 # #################################################################### #
@@ -51,7 +51,7 @@ print """
 :.....................................................:
 """
 
-## FACSIMILE output files to process (script argument)
+## FACSIMILE output files to process (script arguments)
 if sys.argv[1:]:
     for f in sys.argv[1:]:
         expcorr(f)

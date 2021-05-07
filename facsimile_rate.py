@@ -85,7 +85,6 @@ print """
 .......................................................
 : FACSIMILE RATE 2.6                                  :
 :                                                     :
-:                                                     :
 : generate the FACSIMILE code to calculate the rates  :
 : of production and destruction of selected species   :
 :                                                     :
