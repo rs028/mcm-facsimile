@@ -210,7 +210,7 @@ def writemechanism(mecha,spec,n,outputfile):
 # opening message
 print """
 .......................................................
-: FACSIMILE TRACK 0.9                                 :
+: FACSIMILE TRACK v0.9                                :
 :                                                     :
 : generate the FACSIMILE code to track the precursors :
 : of a list of selected species                       :

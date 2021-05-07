@@ -1,6 +1,6 @@
 # #################################################################### #
 #                                                                      #
-# FACSIMILE REACTION RATES                                             #
+# FACSIMILE REACTION RATE                                              #
 #                                                                      #
 # Script to generate the FACSIMILE code for the calculation of the     #
 # rates of production and destruction of selected species in a         #
@@ -83,7 +83,7 @@ def outputrates(r,fname,paramlist,totparamlist,expresslist,definlist):
 
 print """
 .......................................................
-: FACSIMILE RATE 2.6                                  :
+: FACSIMILE REACTION RATE v2.6                        :
 :                                                     :
 : generate the FACSIMILE code to calculate the rates  :
 : of production and destruction of selected species   :
