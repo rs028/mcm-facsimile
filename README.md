@@ -4,39 +4,39 @@ mcm-facsimile
 Python (http//www.python.org/) programs for the manipulation of
 chemical mechanisms in FACSIMILE format (http://www.mcpa-software.com/).
 
-Developed for use with the MCM (Master Chemical Mechanism,
+Developed for use with the Master Chemical Mechanism (MCM,
 http://mcm.leeds.ac.uk/MCM/).
 
 
 DESCRIPTION
 -----------
 
-1) facsimile_check.py:
+1) facsimile_check.py:  
    check a FACSIMILE model for common errors which cause FACSIMILE
    to crash.
 
-2) facsimile_expcorr.py:
+2) facsimile_expcorr.py:  
    fix the exponent issue in FACSIMILE output files.
 
-3) facsimile_rate.py:
+3) facsimile_rate.py:  
    generate the FACSIMILE code to calculate the rates of production
    and destruction of selected species.
 
-4) facsimile_timecode.py:
+4) facsimile_timecode.py:  
    generate the FACSIMILE code for the time control of a model.
 
-5) facsimile_track.py [**EXPERIMENTAL SCRIPT**]:
+5) facsimile_track.py [**EXPERIMENTAL SCRIPT**]:  
    generate the FACSIMILE code to track the precursors of selected
    species.
 
-6) facsimile_var.py:
+6) facsimile_var.py:  
    create the list of species in a chemical mechanism and
    calculate the number of species and of reactions.
 
-7) listcomparison.py:
+7) listcomparison.py:  
    compare two lists of variables.
 
-8) facsimile_funcs.py:
+8) facsimile_funcs.py:  
    module of functions used by the `mcm-facsimile` scripts.
 
 
@@ -45,7 +45,7 @@ REQUIREMENTS & INSTALLATION
 
 A basic installation of Python (version 2.7.x) is needed to run the
 scripts. Note that the scripts will not work with Python 3.x, but can
-be easily converted (if needed) as explained here:
+be easily converted if needed, as explained here:
 https://docs.python.org/3/library/2to3.html
 
 Download the archive file
