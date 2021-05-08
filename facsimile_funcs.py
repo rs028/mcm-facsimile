@@ -2,7 +2,7 @@
 #                                                                       #
 # FACSIMILE FUNCTIONS                                                   #
 #                                                                       #
-# Module of functions for the MCM_FACSIMILE scripts:                    #
+# Module of functions for the 'mcm-facsimile' scripts:                  #
 #                                                                       #
 # - facmecha  : extract the chemical equations from a mechanism         #
 # - ropa      : find the chemical equations containing a given species  #

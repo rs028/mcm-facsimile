@@ -1,8 +1,8 @@
 mcm-facsimile
 =============
 
-Python (http://www.python.org/) programs for the manipulation of
-chemical mechanisms in FACSIMILE format (http://www.mcpa-software.com/).
+Python (https://www.python.org/) programs for the manipulation of
+chemical mechanisms in FACSIMILE format (https://www.mcpa-software.com/).
 
 Developed for use with the Master Chemical Mechanism (MCM,
 http://mcm.leeds.ac.uk/MCM/).
@@ -18,37 +18,37 @@ DESCRIPTION
 2) facsimile_expcorr.py:  
    fix the exponent issue in FACSIMILE output files.
 
-3) facsimile_rate.py:  
+3) facsimile_funcs.py:  
+   module of functions used by the `mcm-facsimile` scripts.
+
+4) facsimile_rate.py:  
    generate the FACSIMILE code to calculate the rates of production
    and destruction of selected species.
 
-4) facsimile_timecode.py:  
+5) facsimile_timecode.py:  
    generate the FACSIMILE code for the time control of a model.
 
-5) facsimile_track.py _[EXPERIMENTAL SCRIPT]_:  
+6) facsimile_track.py **[EXPERIMENTAL SCRIPT]**:  
    generate the FACSIMILE code to track the precursors of selected
    species.
 
-6) facsimile_var.py:  
+7) facsimile_var.py:  
    create the list of species in a chemical mechanism and
    calculate the number of species and of reactions.
 
-7) listcomparison.py:  
+8) listcomparison.py:  
    compare two lists of variables.
-
-8) facsimile_funcs.py:  
-   module of functions used by the `mcm-facsimile` scripts.
 
 
 REQUIREMENTS & INSTALLATION
 ---------------------------
 
 A basic installation of Python (version 2.7.x) is needed to run the
-scripts. Note that the scripts will not work with Python 3.x, but can
-be easily converted if needed, as explained here:
+scripts. Note that the scripts do not work with Python 3.x, although
+they can be easily converted, if needed, as explained here:
 https://docs.python.org/3/library/2to3.html
 
-Download the archive file
+Download the `mcm-facsimile` archive file
 (https://github.com/rs028/mcm-facsimile/archive/refs/heads/master.zip)
 and unzip it in a directory of choice.
 
