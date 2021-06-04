@@ -1,8 +1,8 @@
 mcm-facsimile
 =============
 
-Python (https://www.python.org/) programs for the manipulation of
-chemical mechanisms in FACSIMILE format (https://www.mcpa-software.com/).
+Python (https://www.python.org/) scripts to process chemical
+mechanisms in FACSIMILE format (https://www.mcpa-software.com/).
 
 Developed for use with the Master Chemical Mechanism (MCM,
 http://mcm.leeds.ac.uk/MCM/).
