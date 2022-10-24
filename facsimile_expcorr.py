@@ -9,7 +9,7 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.3, may 2020                                                #
+# version 1.4, october 2022                                            #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -33,25 +33,29 @@ def expcorr(fname):
 
     # use regular expression to replace all occurences of the wrong
     # exponential format (e.g.: 1.234-100) with the correct one
-    newfinstr = re.sub(r'\B(\d)(-)(\d\d\d)\b',r'\1e\2\3',finstr)
+    newfinstr = re.sub(r'\B(\d)(-)(\d\d\d)\b', r'\1e\2\3', finstr)
 
-    # save processed file
+    # save corrected file
     fout.write(newfinstr)
+    print "\n--- output written to", fname, "---\n"
+
+    # close files
     fin.close()
     fout.close()
-    print "\n--- output written to", fname, "---\n"
 
 # #################################################################### #
 
 print """
 .......................................................
-: FACSIMILE EXPCORRECT v1.3                           :
+: FACSIMILE EXPCORRECT v1.4                           :
 :                                                     :
 : fix the exponent issue in FACSIMILE output files    :
 :.....................................................:
 """
 
-## FACSIMILE output files to process (script arguments)
+## FACSIMILE output files to correct (as script arguments)
 if sys.argv[1:]:
     for f in sys.argv[1:]:
         expcorr(f)
+else:
+    print "\n--- input error ---\n"
