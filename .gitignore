@@ -1,4 +1,5 @@
 *.pyc
 *.fac
+*.kpp
 *.in
 *.out
