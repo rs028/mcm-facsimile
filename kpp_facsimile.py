@@ -21,11 +21,12 @@ import re
 def kpp2fac(reaclist):
     varlist = []
     for reac in reaclist:
-        xx = re.split(r"[}:;]", reac)
-        kk = re.sub(r'J\((\d+)\)', r'J<\1>', xx[2])
-        kk = kk.replace('**', '@')
-        yy = "%" + kk + ":" + xx[1] + ";\n"
-        varlist.append(yy)
+        if re.match(r'{\d+\.}', reac):
+            xx = re.split(r'[}:;]', reac)
+            kk = re.sub(r'J\((\d+)\)', r'J<\1>', xx[2])
+            kk = kk.replace('**', '@')
+            yy = "%" + kk + ":" + xx[1] + ";\n"
+            varlist.append(yy)
     return varlist
 
 ## function to convert FAC to KPP
@@ -33,12 +34,13 @@ def fac2kpp(reaclist):
     varlist = []
     i = 1
     for reac in reaclist:
-        xx = re.split(r"[%:;]", reac)
-        kk = re.sub(r'J<(\d+)>', r'J(\1)', xx[1])
-        kk = kk.replace('@', '**')
-        yy = "{" + str(i) + ".}" + xx[2] + ":" + kk + ";\n"
-        i = i + 1
-        varlist.append(yy)
+        if re.match(r'%', reac):
+            xx = re.split(r'[%:;]', reac)
+            kk = re.sub(r'J<(\d+)>', r'J(\1)', xx[1])
+            kk = kk.replace('@', '**')
+            yy = "{" + str(i) + ".}" + xx[2] + ":" + kk + ";\n"
+            i = i + 1
+            varlist.append(yy)
     return varlist
 
 # #################################################################### #
