@@ -3,13 +3,13 @@
 # KPP FACSIMILE                                                        #
 #                                                                      #
 # Script to convert a chemical mechanism between the FACSIMLE and KPP  #
-# formats                                                              #
+# formats.                                                             #
 #                                                                      #
-# example of FACSIMILE format:                                         #
+# Example of FACSIMILE format:                                         #
 #   % 1.4D-12*EXP(-1310/TEMP) : NO + O3 = NO2 ;                        #
 #   % J<4> : NO2 = NO + O ;                                            #
 #                                                                      #
-# example of KPP format:                                               #
+# Example of KPP format:                                               #
 #   {7.} NO + O3 = NO2 : 1.4D-12*EXP(-1310/TEMP) ;                     #
 #   {41.} NO2 = NO + O : J(4) ;                                        #
 #                                                                      #

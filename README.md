@@ -1,8 +1,8 @@
 mcm-facsimile
 =============
 
-Python (https://www.python.org/) scripts to process chemical
-mechanisms in FACSIMILE format (https://www.mcpa-software.com/).
+Python scripts to process chemical mechanisms for the FACSIMILE
+modelling software (https://www.mcpa-software.com/).
 
 Developed for use with the Master Chemical Mechanism (MCM,
 http://mcm.leeds.ac.uk/MCM/).
@@ -12,11 +12,11 @@ DESCRIPTION
 -----------
 
 1) facsimile_check.py:  
-   check a FACSIMILE model for common errors which cause FACSIMILE
-   to crash.
+   check a model for common errors which may cause the FACSIMILE
+   software to crash.
 
 2) facsimile_expcorr.py:  
-   fix the exponent issue in FACSIMILE output files.
+   fix the exponent formatting issue in some FACSIMILE output files.
 
 3) facsimile_funcs.py:  
    module of functions used by the `mcm-facsimile` scripts.
@@ -28,16 +28,20 @@ DESCRIPTION
 5) facsimile_timecode.py:  
    generate the FACSIMILE code for the time control of a model.
 
-6) facsimile_track.py **[EXPERIMENTAL SCRIPT]**:  
+6) facsimile_track.py:  
    generate the FACSIMILE code to track the precursors of selected
-   species.
+   species.  
+   **NOTE: this script is experimental**.
 
 7) facsimile_var.py:  
-   create the list of species in a chemical mechanism and
-   calculate the number of species and of reactions.
+   create the list of species in a FACSIMILE model and calculate the
+   number of species and reactions.
 
 8) listcomparison.py:  
    compare two lists of variables.
+
+9) kpp_facsimile.py:  
+   convert a chemical mechanism between FACSIMILE and KPP formats.
 
 
 REQUIREMENTS & INSTALLATION
@@ -67,5 +71,5 @@ under Linux/Unix/macOS), move into the directory containing the
 
 where <scriptname> is `facsimile_check`, `facsimile_var`, etc...
 
-Some scripts have arguments and some require input files. Check the
+Some scripts have arguments and some require input files. See the
 script header for details.
