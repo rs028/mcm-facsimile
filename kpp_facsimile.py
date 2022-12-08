@@ -2,11 +2,23 @@
 #                                                                      #
 # KPP FACSIMILE                                                        #
 #                                                                      #
-# Script to convert a chemical mechanism to/from FACSIMLE/KPP formats  #
+# Script to convert a chemical mechanism between the FACSIMLE and KPP  #
+# formats                                                              #
+#                                                                      #
+# example of FACSIMILE format:                                         #
+#   % 1.4D-12*EXP(-1310/TEMP) : NO + O3 = NO2 ;                        #
+#   % J<4> : NO2 = NO + O ;                                            #
+#                                                                      #
+# example of KPP format:                                               #
+#   {7.} NO + O3 = NO2 : 1.4D-12*EXP(-1310/TEMP) ;                     #
+#   {41.} NO2 = NO + O : J(4) ;                                        #
+#                                                                      #
+# N.B.: Only the chemical reactions are converted. Complex rate        #
+# coefficients, declarations of variables, and comments are ignored.   #
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 0.9, october 2022                                            #
+# version 1.0, december 2022                                           #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -22,35 +34,42 @@ def kpp2fac(reaclist):
     varlist = []
     for reac in reaclist:
         if re.match(r'{\d+\.}', reac):
-            xx = re.split(r'[}:;]', reac)
-            kk = re.sub(r'J\((\d+)\)', r'J<\1>', xx[2])
-            kk = kk.replace('**', '@')
-            yy = "%" + kk + ":" + xx[1] + ";\n"
-            varlist.append(yy)
+            # KPP reaction
+            reac1 = re.split(r'[}:;]', reac)
+            # convert rate coefficient
+            kk1 = re.sub(r'J\((\d+)\)', r'J<\1>', reac1[2])
+            kk2 = kk1.replace('**', '@')
+            # FAC reaction
+            reac2 = "%" + kk2 + ":" + reac1[1] + ";\n"
+            varlist.append(reac2)
     return varlist
 
 ## function to convert FAC to KPP
 def fac2kpp(reaclist):
     varlist = []
-    i = 1
+    i = 1  # reaction counter
     for reac in reaclist:
         if re.match(r'%', reac):
-            xx = re.split(r'[%:;]', reac)
-            kk = re.sub(r'J<(\d+)>', r'J(\1)', xx[1])
-            kk = kk.replace('@', '**')
-            yy = "{" + str(i) + ".}" + xx[2] + ":" + kk + ";\n"
+            # FAC reaction
+            reac1 = re.split(r'[%:;]', reac)
+            # convert rate coefficient
+            kk1 = re.sub(r'J<(\d+)>', r'J(\1)', reac1[1])
+            kk2 = kk1.replace('@', '**')
+            # KPP reaction
+            reac2 = "{" + str(i) + ".}" + reac1[2] + ":" + kk2 + ";\n"
             i = i + 1
-            varlist.append(yy)
+            varlist.append(reac2)
     return varlist
 
 # #################################################################### #
 
 print """
-.......................................................
-: KPP FACSIMILE  v0.9                                 :
-:                                                     :
-: convert FAC to KPP/ KPP to FAC                      :
-:.....................................................:
+...................................................
+: KPP FACSIMILE  v1.0                             :
+:                                                 :
+: convert a chemical mechanism from FAC to KPP or :
+: from KPP to FAC                                 :
+:.................................................:
 """
 
 # input file (script argument or enter manually)
@@ -59,6 +78,8 @@ if sys.argv[1:]:
 else:
     print "-> name of mechanism file:"
     fname = raw_input("-> ")
+
+# open I/O files
 fin = open(fname, "r")
 fname = fname+".out"
 fout = open(fname, "w")
@@ -76,13 +97,13 @@ if fext == "fac":
 elif fext == "kpp":
     mechlist = kpp2fac(finlist)
 else:
-    print "file not recognized"
+    print "\n--- mechanism format not recognized ---\n"
 
-# save
-for r in mechlist:
-    fout.write(r)
+# save mechanism in new format
+for reac in mechlist:
+    fout.write(reac)
+print "\n--- mechanism saved to", fname, "---\n"
 
 # close files
 fin.close()
 fout.close()
-print "\n--- output written to", fname, "---\n"

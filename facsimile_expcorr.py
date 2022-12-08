@@ -46,11 +46,11 @@ def expcorr(fname):
 # #################################################################### #
 
 print """
-.......................................................
-: FACSIMILE EXPCORRECT v1.4                           :
-:                                                     :
-: fix the exponent issue in FACSIMILE output files    :
-:.....................................................:
+....................................................
+: FACSIMILE EXPCORRECT v1.4                        :
+:                                                  :
+: fix the exponent issue in FACSIMILE output files :
+:..................................................:
 """
 
 ## FACSIMILE output files to correct (as script arguments)
@@ -58,4 +58,4 @@ if sys.argv[1:]:
     for f in sys.argv[1:]:
         expcorr(f)
 else:
-    print "\n--- input error ---\n"
+    print "\n--- error: missing argument ---\n"
