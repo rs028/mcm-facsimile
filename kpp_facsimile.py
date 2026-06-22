@@ -18,7 +18,7 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.0, december 2022                                           #
+# version 2.0, june 2026                                               #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -63,26 +63,26 @@ def fac2kpp(reaclist):
 
 # #################################################################### #
 
-print """
+print("""
 ...................................................
-: KPP FACSIMILE  v1.0                             :
+: KPP FACSIMILE  v2.0                             :
 :                                                 :
 : convert a chemical mechanism from FAC to KPP or :
 : from KPP to FAC                                 :
 :.................................................:
-"""
+""")
 
 # input file (script argument or enter manually)
 if sys.argv[1:]:
     fname = sys.argv[1]
 else:
-    print "-> name of mechanism file:"
-    fname = raw_input("-> ")
+    print("-> name of mechanism file:")
+    fname = input("-> ")
 
 # open I/O files
 fin = open(fname, "r")
-fname = fname+".out"
-fout = open(fname, "w")
+outname = fname + ".out"
+fout = open(outname, "w")
 
 # read mechanism file into list
 finlist = fin.readlines()
@@ -97,12 +97,12 @@ if fext == "fac":
 elif fext == "kpp":
     mechlist = kpp2fac(finlist)
 else:
-    print "\n--- mechanism format not recognized ---\n"
+    print("\n--- error: mechanism format not recognized ---\n")
 
 # save mechanism in new format
 for reac in mechlist:
     fout.write(reac)
-print "\n--- mechanism saved to", fname, "---\n"
+print("\n--- mechanism saved to", outname, "---\n")
 
 # close files
 fin.close()

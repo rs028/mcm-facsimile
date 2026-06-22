@@ -9,7 +9,7 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.4, october 2022                                            #
+# version 2.4, june 2026                                               #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -25,8 +25,8 @@ def expcorr(fname):
 
     # open I/O files
     fin = open(fname, "r")
-    fname = fname+".out"
-    fout = open(fname, "w")
+    outname = fname + ".out"
+    fout = open(outname, "w")
 
     # read file into string
     finstr = fin.read()
@@ -37,7 +37,7 @@ def expcorr(fname):
 
     # save corrected file
     fout.write(newfinstr)
-    print "\n--- output written to", fname, "---\n"
+    print("\n--- output written to", outname, "---\n")
 
     # close files
     fin.close()
@@ -45,17 +45,17 @@ def expcorr(fname):
 
 # #################################################################### #
 
-print """
+print("""
 ....................................................
-: FACSIMILE EXPCORRECT v1.4                        :
+: FACSIMILE EXPCORRECT v2.4                        :
 :                                                  :
 : fix the exponent issue in FACSIMILE output files :
 :..................................................:
-"""
+""")
 
 ## FACSIMILE output files to correct (as script arguments)
 if sys.argv[1:]:
     for f in sys.argv[1:]:
         expcorr(f)
 else:
-    print "\n--- error: missing argument ---\n"
+    print("\n--- error: missing argument ---\n")

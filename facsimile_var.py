@@ -15,7 +15,7 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 1.2, july 2017                                               #
+# version 2.2, june 2026                                               #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -24,21 +24,21 @@
 import sys
 import facsimile_funcs
 
-print """
+print("""
 .......................................................
-: FACSIMILE VARIABLES  v1.2                           :
+: FACSIMILE VARIABLES  v2.2                           :
 :                                                     :
 : - list chemical variables in mechanism              :
 : - count number of species and reactions             :
 :.....................................................:
-"""
+""")
 
 # input file (script argument or enter manually)
 if sys.argv[1:]:
     fname = sys.argv[1]
 else:
-    print "-> name of mechanism file:"
-    fname = raw_input("-> ")
+    print("-> name of mechanism file:")
+    fname = input("-> ")
 fin = open(fname, "r")
 
 # output file
@@ -81,9 +81,9 @@ fout.write("---------------------------\n\n")
 facsimile_funcs.listblock(varlist,fout)
 
 # output summary of results to console
-print "\nn. variables:", nvar
-print "n. reactions:", nreac
-print "\n--- output written to facsimile_var.out ---\n"
+print("n. variables", nvar)
+print("n. reactions:", nreac)
+print("\n--- output written to facsimile_var.out ---\n")
 
 # close files
 fin.close()
