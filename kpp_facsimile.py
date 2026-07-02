@@ -104,6 +104,6 @@ for reac in mechlist:
     fout.write(reac)
 print("\n--- mechanism saved to", outname, "---\n")
 
-# close files
+# close I/O files
 fin.close()
 fout.close()

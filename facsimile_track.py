@@ -17,7 +17,7 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 0.9, may 2006                                                #
+# version 1.9-beta, july 2026                                          #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -210,7 +210,7 @@ def writemechanism(mecha,spec,n,outputfile):
 # opening message
 print """
 .......................................................
-: FACSIMILE TRACK v0.9                                :
+: FACSIMILE TRACK v1.9-beta                           :
 :                                                     :
 : generate the FACSIMILE code to track the precursors :
 : of a list of selected species                       :
@@ -227,12 +227,14 @@ if sys.argv[1:]:
     fname = sys.argv[1]
 # file with mechanism is entered manually
 else:
-    print "enter name of the file with the mechanism"
-    fname = raw_input("filename: ")
+    print("enter name of the file with the chemical mechanism")
+    fname = input("filename: ")
+
+# open input and output files
 fin = open(fname, "r")
-fname = fname + ".track"
-fout = open(fname+".out", "w")
-foutl = open(fname+"_legend.out", "w")
+outname = fname+"_track"
+fout = open(outname+".out", "w")
+foutl = open(outname+"_legend.out", "w")
 
 # read the input file in string
 facstring = fin.read()
@@ -306,5 +308,6 @@ for i in range(0,len(newspec)):
 fin.close()
 fout.close()
 foutl.close()
-print "\n--- output written to", fname+".out", "---"
-print "--- legend written to", fname+"_legend.out", "---\n"
+
+print("\n--- output written to", outname+".out", "---")
+print("--- legend written to", outname+"_legend.out", "---\n")

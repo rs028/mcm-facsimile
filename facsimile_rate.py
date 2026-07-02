@@ -13,7 +13,7 @@
 #                                                                      #
 # #################################################################### #
 #                                                                      #
-# version 2.6, april 2021                                              #
+# version 3.6, july 2026                                               #
 #                                                                      #
 # author: R.S.                                                         #
 #                                                                      #
@@ -27,8 +27,8 @@ import facsimile_funcs
 ## function to write the lists of parameters, the expressions to
 ## calculate the production and destruction rates, and the definitions
 ## of the new parameters to an output file
-def outputrates(r,fname,paramlist,totparamlist,expresslist,definlist):
-    fout = open(fname, "w")
+def outputrates(r,outname,paramlist,totparamlist,expresslist,definlist):
+    fout = open(outname, "w")
 
     # write list of parameters to output file
     fout.write("""* ;\nPARAMETER\n""")
@@ -45,6 +45,9 @@ def outputrates(r,fname,paramlist,totparamlist,expresslist,definlist):
         rstr = "production"
     elif r == 'd':
         rstr = "destruction"
+    else:
+        print("\n--- error: invalid option ---\n")
+        exit()
 
     fout.write("""\n* ;
 * ********************************************** * ;
@@ -77,27 +80,27 @@ def outputrates(r,fname,paramlist,totparamlist,expresslist,definlist):
 
     # close file and print message
     fout.close()
-    print "\n--- output written to", fname, "---\n"
+    print("\n--- output written to", outname, "---\n)"
 
 # #################################################################### #
 
-print """
+print("""
 .......................................................
-: FACSIMILE REACTION RATE v2.6                        :
+: FACSIMILE REACTION RATE v3.6                        :
 :                                                     :
 : generate the FACSIMILE code to calculate the rates  :
 : of production and destruction of selected species   :
 :                                                     :
 : >>> selected species in 'facsimile_rate.in' <<<     :
 :.....................................................:
-"""
+""")
 
 # open input and output files
-print "enter name of the file with the chemical mechanism"
-filename = raw_input("filename: ")
-fin = open(filename, "r")
-fileoutP = filename + ".rateP.out"
-fileoutD = filename + ".rateD.out"
+print("enter name of the file with the chemical mechanism")
+fname = input("filename: ")
+fin = open(fname, "r")
+fileoutP = fname + "_rateP.out"
+fileoutD = fname + "_rateD.out"
 
 # read input file in string
 facstring = fin.read()
@@ -115,9 +118,9 @@ for i in range(len(listspecies)):
 
 # select the rates of the reactions involving a specific reactant
 # (reactant name in upper case)
-print "\nwrite only the rates of reactions that include a specific reactant?"
-print "[default: write the rates of all reactions]"
-reactant = raw_input("reactant name [press enter for default]: ")
+print("\nwrite only the rates of reactions that include a specific reactant?")
+print("[default: write the rates of all reactions]")
+reactant = input("reactant name [press enter for default]: ")
 if reactant != '':
     reactant = "*" + reactant.upper() + "*"
 
