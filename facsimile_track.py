@@ -208,7 +208,7 @@ def writemechanism(mecha,spec,n,outputfile):
 # #################################################################### #
 
 # opening message
-print """
+print("""
 .......................................................
 : FACSIMILE TRACK v1.9-beta                           :
 :                                                     :
@@ -217,7 +217,7 @@ print """
 :                                                     :
 :  !!! WARNING -- EXPERIMENTAL SCRIPT -- WARNING !!!  :
 :.....................................................:
-"""
+""")
 
 # get list of species
 listspecies = facsimile_funcs.openlist('facsimile_track.in')

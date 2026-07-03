@@ -78,9 +78,9 @@ def outputrates(r,outname,paramlist,totparamlist,expresslist,definlist):
         for d in dlist:
             fout.write(d)
 
-    # close file and print message
+    # close file
     fout.close()
-    print("\n--- output written to", outname, "---\n)"
+    print("\n--- output written to", outname, "---\n")
 
 # #################################################################### #
 
